@@ -23,9 +23,8 @@ const NavigationItem = ({ item, isActive, onClick, isCollapsed }) => {
         }`}
     >
       <Icon
-        className={`h-5 w-5 flex-shrink-0 ${
-          isActive ? "text-blue-600" : "text-gray-500"
-        }`}
+        className={`h-5 w-5 flex-shrink-0 ${isActive ? "text-blue-600" : "text-gray-500"
+          }`}
       />
       {!isCollapsed && <span className="ml-3 truncate">{item.name}</span>}
     </button>
@@ -33,7 +32,7 @@ const NavigationItem = ({ item, isActive, onClick, isCollapsed }) => {
 };
 
 const Dashboardlayout = ({ activeMenu, children }) => {
-  const { logout,user } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -86,12 +85,11 @@ const Dashboardlayout = ({ activeMenu, children }) => {
       {/* Sidebar */}
       <div
         className={`fixed inset-y-0 left-0 z-50 transition-transform duration-300 transform
-          ${
-            isMobile
-              ? sidebarOpen
-                ? "translate-x-0"
-                : "-translate-x-full"
-              : "translate-x-0"
+          ${isMobile
+            ? sidebarOpen
+              ? "translate-x-0"
+              : "-translate-x-full"
+            : "translate-x-0"
           } ${sidebarCollapsed ? "w-16" : "w-64"} 
           bg-white border-r border-gray-200 shadow-lg flex flex-col justify-between`}
       >
@@ -146,9 +144,8 @@ const Dashboardlayout = ({ activeMenu, children }) => {
 
       {/* Main content */}
       <div
-        className={`flex-1 flex flex-col transition-all duration-300 ${
-          isMobile ? "ml-0" : sidebarCollapsed ? "ml-16" : "ml-64"
-        }`}
+        className={`flex-1 flex flex-col transition-all duration-300 ${isMobile ? "ml-0" : sidebarCollapsed ? "ml-16" : "ml-64"
+          }`}
       >
         {/* Header */}
         <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 h-16 flex items-center justify-between px-4">
@@ -176,15 +173,15 @@ const Dashboardlayout = ({ activeMenu, children }) => {
           <div className="flex items-center space-x-3">
             {/* Profile dropdown */}
             <ProfileDropdown
-                isOpen={profileDropdownOpen}
-                onToggle={(e) => {
+              isOpen={profileDropdownOpen}
+              onToggle={(e) => {
                 e.stopPropagation();
                 setProfileDropdownOpen((prev) => !prev);
-                }}
-                avatar={user?.avatar || "/default-avatar.png"}
-                companyName={user?.name || "Employer"}
-                email={user?.email || "example@email.com"}
-                onLogout={logout}
+              }}
+              avatar={user?.avatar}
+              companyName={user?.name || "Employer"}
+              email={user?.email || "example@email.com"}
+              onLogout={logout}
             />
           </div>
         </header>
