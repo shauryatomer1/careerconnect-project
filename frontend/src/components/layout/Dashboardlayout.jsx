@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { NAVIGATION_MENU } from "../../utils/data";
 import ProfileDropdown from "./ProfileDropdown";
+import { getImageUrl } from "../../utils/imageHelper";
 
 const NavigationItem = ({ item, isActive, onClick, isCollapsed }) => {
   const Icon = item.icon;
@@ -178,7 +179,7 @@ const Dashboardlayout = ({ activeMenu, children }) => {
                 e.stopPropagation();
                 setProfileDropdownOpen((prev) => !prev);
               }}
-              avatar={user?.avatar}
+              avatar={getImageUrl(user?.avatar)}
               companyName={user?.name || "Employer"}
               email={user?.email || "example@email.com"}
               onLogout={logout}

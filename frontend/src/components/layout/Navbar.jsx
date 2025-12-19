@@ -3,6 +3,7 @@ import { Briefcase, Bookmark, Menu, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import ProfileDropdown from "./ProfileDropdown";
+import { getImageUrl } from "../../utils/imageHelper";
 
 const Navbar = () => {
   const { user, logout, isAuthenticated } = useAuth();
@@ -52,7 +53,7 @@ const Navbar = () => {
                   e.stopPropagation();
                   setProfileDropdownOpen(!profileDropdownOpen);
                 }}
-                avatar={user?.avatar || ""}
+                avatar={getImageUrl(user?.avatar)}
                 companyName={user?.name || ""}
                 email={user?.email || ""}
                 userRole={user?.role || ""}
@@ -115,7 +116,7 @@ const Navbar = () => {
                   e.stopPropagation();
                   setProfileDropdownOpen(!profileDropdownOpen);
                 }}
-                avatar={user?.avatar || ""}
+                avatar={getImageUrl(user?.avatar)}
                 companyName={user?.name || ""}
                 email={user?.email || ""}
                 userRole={user?.role || ""}

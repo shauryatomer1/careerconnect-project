@@ -5,6 +5,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import toast from "react-hot-toast";
 import uploadImage from "../../utils/uploadImage";
+import { getImageUrl } from "../../utils/imageHelper";
 import EditProfileDetails from "./EditProfileDetails";
 
 import Dashboardlayout from "../../components/layout/Dashboardlayout";
@@ -35,52 +36,52 @@ const EmployerProfilePage = () => {
   const handleImageUpload = async (file, type) => {
     setUploading((prev) => ({ ...prev, [type]: true }));
 
-try {
-  const imgUploadRes = await uploadImage(file);
-  const avatarUrl = imgUploadRes.imageUrl || "";
+    try {
+      const imgUploadRes = await uploadImage(file);
+      const avatarUrl = imgUploadRes.imageUrl || "";
 
-  // Update form data with new image URL
-  const field = type === "avatar" ? "avatar" : "companyLogo";
-  handleInputChange(field, avatarUrl);
-} catch (error) {
-  console.error("Image upload failed:", error);
-} finally {
-  setUploading((prev) => ({ ...prev, [type]: false }));
-}
+      // Update form data with new image URL
+      const field = type === "avatar" ? "avatar" : "companyLogo";
+      handleInputChange(field, avatarUrl);
+    } catch (error) {
+      console.error("Image upload failed:", error);
+    } finally {
+      setUploading((prev) => ({ ...prev, [type]: false }));
+    }
   };
   const handleImageChange = (e, type) => {
     const file = e.target.files[0];
-if (file) {
-  // Create preview URL
-  const previewUrl = URL.createObjectURL(file);
-  const field = type === "avatar" ? "avatar" : "companyLogo";
-  handleInputChange(field, previewUrl);
+    if (file) {
+      // Create preview URL
+      const previewUrl = URL.createObjectURL(file);
+      const field = type === "avatar" ? "avatar" : "companyLogo";
+      handleInputChange(field, previewUrl);
 
-  // Upload image
-  handleImageUpload(file, type);
-}
+      // Upload image
+      handleImageUpload(file, type);
+    }
   };
   const handleSave = async () => {
     setSaving(true);
 
-try {
-  const response = await axiosInstance.put(
-    API_PATHS.AUTH.UPDATE_PROFILE,
-    formData
-  );
+    try {
+      const response = await axiosInstance.put(
+        API_PATHS.AUTH.UPDATE_PROFILE,
+        formData
+      );
 
-  if (response.status === 200) {
-    toast.success("Profile Details Updated Successfully!!");
-    // Update profile data and exit edit mode
-    setProfileData({ ...formData });
-    updateUser({ ...formData })
-    setEditMode(false);
-  }
-} catch (error) {
-  console.error("Error updating profile:", error);
-} finally {
-  setSaving(false); 
-  }
+      if (response.status === 200) {
+        toast.success("Profile Details Updated Successfully!!");
+        // Update profile data and exit edit mode
+        setProfileData({ ...formData });
+        updateUser({ ...formData })
+        setEditMode(false);
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleCancel = () => {
@@ -89,18 +90,18 @@ try {
   };
 
   if (editMode) {
-  return (
-    <EditProfileDetails
-      formData={formData}
-      handleImageChange={handleImageChange}
-      handleInputChange={handleInputChange}
-      handleSave={handleSave}
-      handleCancel={handleCancel}
-      saving={saving}
-      uploading={uploading}
-    />
-  );
-}
+    return (
+      <EditProfileDetails
+        formData={formData}
+        handleImageChange={handleImageChange}
+        handleInputChange={handleInputChange}
+        handleSave={handleSave}
+        handleCancel={handleCancel}
+        saving={saving}
+        uploading={uploading}
+      />
+    );
+  }
 
   return (
     <Dashboardlayout>
@@ -131,7 +132,7 @@ try {
                   {/* Avatar and Name */}
                   <div className="flex items-center space-x-4">
                     <img
-                      src={profileData.avatar}
+                      src={getImageUrl(profileData.avatar)}
                       alt="Avatar"
                       className="w-20 h-20 rounded-full object-cover border-4 border-blue-50"
                     />
@@ -156,7 +157,7 @@ try {
                   {/* Company Logo and Name */}
                   <div className="flex items-center space-x-4">
                     <img
-                      src={profileData.companyLogo}
+                      src={getImageUrl(profileData.companyLogo)}
                       alt="Company Logo"
                       className="w-20 h-20 rounded-lg object-cover border-4 border-blue-50"
                     />

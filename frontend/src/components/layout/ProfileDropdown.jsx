@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { getImageUrl } from "../../utils/imageHelper";
 
 const ProfileDropdown = ({
   isOpen,
@@ -20,7 +21,7 @@ const ProfileDropdown = ({
       >
         {avatar ? (
           <img
-            src={avatar}
+            src={getImageUrl(avatar)}
             alt="Avatar"
             className="h-12 w-12 object-cover rounded-xl"  // ✅ bigger & squarish
           />
