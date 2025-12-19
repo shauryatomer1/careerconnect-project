@@ -34,25 +34,25 @@ const ProfileDropdown = ({
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-100 rounded-xl shadow-lg z-50 py-2">
-          <div className="px-4 py-3 border-b border-gray-100">
-            <p className="text-sm font-medium text-gray-900">{companyName}</p>
-            <p className="text-xs text-gray-500">{email}</p>
+        <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl shadow-lg z-50 py-2">
+          <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
+            <p className="text-sm font-medium text-gray-900 dark:text-white">{companyName}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{email}</p>
           </div>
 
           <button
             onClick={() =>
               navigate(userRole === "jobseeker" ? "/profile" : "/company-profile")
             }
-            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+            className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           >
             View Profile
           </button>
 
-          <div className="border-t border-gray-100 mt-2 pt-2">
+          <div className="border-t border-gray-100 dark:border-gray-700 mt-2 pt-2">
             <button
               onClick={onLogout}
-              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+              className="block w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
             >
               Sign out
             </button>
