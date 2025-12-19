@@ -33,7 +33,11 @@ app.use("/api/user", userRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/saved-jobs", savedJobsRoutes);
-app.use("/api/analytics",analyticsRoutes); 
+app.use("/api/analytics", analyticsRoutes);
+
+app.get("/", (req, res) => {
+  res.send("API is working properly");
+});
 
 // Serve uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
